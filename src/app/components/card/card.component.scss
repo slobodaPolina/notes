@@ -1,4 +1,8 @@
 .card {
   width: fit-content;
-  max-width: 50%;
+
+  .card-actions {
+    display: flex;
+    justify-content: end;
+  }
 }

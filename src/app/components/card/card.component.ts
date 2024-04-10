@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {cardsActions} from '../../actions/card.actions';
 import {Card} from '../../models/card';
 
 @Component({
@@ -7,12 +9,20 @@ import {Card} from '../../models/card';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
-  card: Card = {
-    title: 'Simple Title',
-    text: 'A lot of simple text',
-    id: 1,
-    likes: 3,
-    dislikes: 5
-  };
+  @Input() card?: Card;
 
+  constructor(private store: Store) {
+  }
+
+  like(card: Card) {
+    this.store.dispatch(cardsActions.like(card));
+  }
+
+  dislike(card: Card) {
+    this.store.dispatch(cardsActions.dislike(card));
+  }
+
+  delete(card: Card) {
+    this.store.dispatch(cardsActions.delete(card));
+  }
 }
