@@ -1,4 +1,5 @@
-<mat-card class="card" *ngIf="card">
+@if (card) {
+<mat-card class="card">
 
   <mat-card-header>{{card.title}}</mat-card-header>
   <mat-card-content>{{card.text}}</mat-card-content>
@@ -19,3 +20,4 @@
   </mat-card-actions>
 
 </mat-card>
+}

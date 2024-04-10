@@ -1,3 +1,5 @@
 <div class="cards-container">
-  <card *ngFor="let card of (cards$ | async)" [card]="card"></card>
+  @for (card of (cards$ | async); track card.id) {
+    <card [card]="card"></card>
+  }
 </div>
