@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
-import {cardsActions} from '../actions/card.actions';
-import {Card, Id} from '../models/card';
+import {Card} from '../models/card';
+import {cardsActions} from './card.actions';
 
 const card1: Card = {
   title: 'Simple Title',
@@ -18,13 +18,21 @@ const card2: Card = {
   dislikes: 52
 };
 
-const initialState = [card1, card2, card1, card1, card1, card1, card1, card1];
+const card3: Card = {
+  title: 'Simple Title 3',
+  text: 'A lot of simple text! Even more text!',
+  id: 3,
+  likes: 6,
+  dislikes: 0
+};
+
+const initialState = [card1, card2, card3];
 
 export const cardsReducer = createReducer(
   initialState,
-  on(cardsActions.like, (cards, props: Id) => incrementProperty(cards, props.id, 'likes')),
-  on(cardsActions.dislike, (cards, props: Id) => incrementProperty(cards, props.id, 'dislikes')),
-  on(cardsActions.delete, (cards, props: Id) => deleteCard(cards, props.id))
+  on(cardsActions.like, (cards, { id }) => incrementProperty(cards, id, 'likes')),
+  on(cardsActions.dislike, (cards, { id }) => incrementProperty(cards, id, 'dislikes')),
+  on(cardsActions.delete, (cards, { id }) => deleteCard(cards, id))
 );
 
 const incrementProperty = (cards: Card[], id: number, incProperty: keyof Card) =>  {

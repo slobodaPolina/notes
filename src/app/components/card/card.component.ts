@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {cardsActions} from '../../actions/card.actions';
 import {Card} from '../../models/card';
+import {cardsActions} from '../../store/card.actions';
 
 @Component({
   selector: 'card',

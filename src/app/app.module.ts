@@ -3,13 +3,13 @@ import {MatButton} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserModule} from '@angular/platform-browser';
-import {provideStore, StoreModule} from '@ngrx/store';
+import {StoreModule} from '@ngrx/store';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CardListComponent} from './components/card-list/card-list.component';
 import {CardComponent} from './components/card/card.component';
-import {cardsReducer} from './reducers/cardsReducer';
+import {forRootReducers} from './store/app-reducers';
 
 @NgModule({
   declarations: [
@@ -23,10 +23,9 @@ import {cardsReducer} from './reducers/cardsReducer';
     MatCardModule,
     MatButton,
     MatIconModule,
-    StoreModule.forRoot({ cards: cardsReducer })
+    StoreModule.forRoot(forRootReducers)
   ],
   providers: [
-    //provideStore({ card: cardReducer })
   ],
   bootstrap: [AppComponent]
 })
