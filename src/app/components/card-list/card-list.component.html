@@ -1,5 +1,5 @@
 <div class="cards-container">
-  @for (card of (cards$ | async); track card.id) {
-    <card [card]="card"></card>
+  @for (id of (cardsIds$ | async); track id) {
+    <card [cardId]="id"></card>
   }
 </div>

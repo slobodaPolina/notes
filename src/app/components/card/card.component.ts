@@ -1,17 +1,26 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
 import {Card} from '../../models/card';
+import {AppState} from '../../store/app-state';
 import {cardsActions} from '../../store/card.actions';
+import {selectCard} from '../../store/cards.selector';
 
 @Component({
   selector: 'card',
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent {
-  @Input() card?: Card;
+export class CardComponent implements OnInit {
+  @Input() cardId?: number;
 
-  constructor(private store: Store) {
+  card$?: Observable<Card | undefined>;
+
+  constructor(private store: Store<AppState>) {
+  }
+
+  ngOnInit() {
+    this.card$ = this.store.select(selectCard(this.cardId));
   }
 
   like(card: Card) {

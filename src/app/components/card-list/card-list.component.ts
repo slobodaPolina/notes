@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {Card} from '../../models/card';
 import {AppState} from '../../store/app-state';
-import {selectAllCards} from '../../store/cards.selector';
+import {selectAllCardsIds} from '../../store/cards.selector';
 
 @Component({
   selector: 'card-list',
@@ -11,9 +10,9 @@ import {selectAllCards} from '../../store/cards.selector';
   styleUrl: './card-list.component.scss'
 })
 export class CardListComponent {
-  cards$!: Observable<Card[]>;
+  cardsIds$!: Observable<number[]>;
 
   constructor(private store: Store<AppState>) {
-    this.cards$ = this.store.select(selectAllCards);
+    this.cardsIds$ = this.store.select(selectAllCardsIds);
   }
 }

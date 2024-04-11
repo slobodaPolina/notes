@@ -26,7 +26,7 @@ const card3: Card = {
   dislikes: 0
 };
 
-const initialState = [card1, card2, card3];
+const initialState: Map<number, Card> = new Map([[1, card1], [2, card2], [3, card3]]);
 
 export const cardsReducer = createReducer(
   initialState,
@@ -35,17 +35,22 @@ export const cardsReducer = createReducer(
   on(cardsActions.delete, (cards, { id }) => deleteCard(cards, id))
 );
 
-const incrementProperty = (cards: Card[], id: number, incProperty: keyof Card) =>  {
-  return cards.map(card => (
-    card.id === id ?
-      {
-        ...card,
-        [incProperty]:(card[incProperty] as number) + 1
-      } :
-      card
-  ));
+const incrementProperty = (cards: Map<number, Card>, id: number, incProperty: keyof Card) =>  {
+  const card = cards.get(id);
+  if(!card) {
+    return cards;
+  }
+
+  const copy = new Map(cards);
+  copy.set(id, {
+    ...card,
+    [incProperty]: (card[incProperty] as number) + 1
+  });
+  return copy;
 };
 
-const deleteCard = (cards: Card[], id: number) =>  {
-  return cards.filter(card => (card.id !== id));
+const deleteCard = (cards: Map<number, Card>, id: number) =>  {
+  const copy = new Map(cards);
+  copy.delete(id);
+  return copy;
 };

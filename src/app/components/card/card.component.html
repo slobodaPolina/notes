@@ -1,4 +1,4 @@
-@if (card) {
+@if (card$ && (card$ | async); as card) {
 <mat-card class="card">
 
   <mat-card-header>{{card.title}}</mat-card-header>
